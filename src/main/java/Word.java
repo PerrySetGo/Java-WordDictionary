@@ -1,21 +1,26 @@
-import java.util.Random;
-
 public class Word {
   private String mName;
-  private Integer mId;
+  private int mWordId;//may want to change this to size of collection class later.
+  private String mDefinition;
 
-
-  public Word(String name, int Id) {
+  //constructor class
+  public Word(String name, int wordId, String definition) {
     mName = name;
-    mId = Id;
+    mWordId = wordId;
+    mDefinition = definition;
   }
 
+  //getter methods
   public String getName() {
     return mName;
   }
 
-  public Integer getId() {
-    return mId;
+  public int getWordId() {
+    return mWordId;
+  }
+
+  public String getDefinition(){
+    return mDefinition;
   }
 
 }

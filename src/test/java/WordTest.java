@@ -4,26 +4,26 @@ import static org.junit.Assert.*;
 public class WordTest {
 
   @Test
-  public void word_initializesCorrectly_true() {
-    Word testWord = new Word("Dog", 1);
+  public void wordInitializesCorrectly_true() {
+    Word testWord = new Word("Dog", 1, "A furry mammal");
     assertEquals(true, testWord instanceof Word);
   }
 
-  // @Test
-  // public void getSuit_returnsACardsSuit_Spades() {
-  //   Card testCard = new Card("Spades", "Ace");
-  //   assertEquals("Spades", testCard.getSuit());
-  // }
+  @Test
+  public void getWordName_returnsWordName_true() {
+    Word testWord = new Word("Dog", 1, "A furry mammal");
+    assertEquals("Dog", testWord.getName());
+   }
 
-  // @Test
-  // public void getValue_returnsACardsSuit_Ace() {
-  //   Card testCard = new Card("Spades", "Ace");
-  //   assertEquals("Ace", testCard.getValue());
-  // }
+   @Test
+   public void getWordIdreturnsWordName_true() {
+    Word testWord = new Word("Dog", 1, "A furry mammal");
+    assertEquals(1, testWord.getWordId());
+  }
 
-  // @Test
-  // public void name_returnsAFormattedNameForCard_AceOfSpades() {
-  //   Card testCard = new Card("Spades", "Ace");
-  //   assertEquals("Ace of Spades", testCard.name());
-  // }
+  @Test
+  public void getWordDefinitionReturnsDefinition_true() {
+    Word testWord = new Word("Dog", 1, "A furry mammal");
+    assertEquals("A furry mammal", testWord.getDefinition());
+  }
 }
