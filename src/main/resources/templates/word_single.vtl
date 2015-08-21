@@ -1,0 +1,8 @@
+<h1>This is your word.</h1>
+
+#if ($foundWord)
+  <h3>$foundWord.getWordId().) $foundWord.getName()</h3>
+  <p>$foundWord.getDefinition()</p>
+#else
+  <h3> Sorry, that word couldn't be found.</h3>
+#end

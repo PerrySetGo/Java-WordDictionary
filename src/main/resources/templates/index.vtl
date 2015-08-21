@@ -1,17 +1,26 @@
 <h1>Word Dictionary</h1>
 <h3> Hi! </h3>
+These are the words we currently have in the dictionary:<br />
 #if ($wordList)
 <ol>
 #foreach ($word in $wordList)
-  <li>$word.getName(), $word.getDefinition()
+  <li><a href="$word.getWordId()">$word.getName()</a>, $word.getDefinition()
 #end
 </ol>
 #else
 <p>There are no words added to the dictionary yet.<p><br>
 #end	
 Would you like to add a word?<br>
-<form action="/words" method="post">
+<form action="/" method="post">
 	<p><input type="text" name="addWordName" id="addWordName" value="tree"></p>
 	<p><textarea id="addWordDefinition" name="addWordDefinition">Treedefinition</textarea></p><br>
 	<button type="submit" id="addWordButton" class="btn btn-info">Add my word!</button>
+</form>
+
+Find a word by it's ID:
+<form action="/find" method="post">
+  <label for="findWordById">Find task by ID #:</label>
+  <input id="findWordById" name="findWordById" type="text">
+
+  <button type="submit" id="findWordByIdButton" class="btn btn-default">Find Word by ID</button>
 </form>

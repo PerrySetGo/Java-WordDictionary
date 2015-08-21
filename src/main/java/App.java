@@ -1,4 +1,5 @@
 import java.util.*;
+import java.util.ArrayList;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
@@ -17,7 +18,7 @@ public class App {
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
-        post("/words", (request, response) -> {
+        post("/", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
           ArrayList<Word> wordList = request.session().attribute("wordList");
 
@@ -30,21 +31,32 @@ public class App {
           String userInputWordDefinition = request.queryParams("addWordDefinition"); 
 
           Word myWord = new Word(userInputWordName,userInputWordDefinition);
-
           wordList.add(myWord);
-
+          model.put("wordList", Word.all());
           model.put("template", "templates/success.vtl");
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
 
+        get("/:id", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            ArrayList<Word> wordList = request.session().attribute("wordList");
+            Integer wordId = Integer.parseInt(request.params(":id"));
+            Word foundWord = Word.find(wordId);
+            model.put("foundWord", foundWord);
+            model.put("template", "templates/word_single.vtl");
+            return new ModelAndView(model, layout);
+          }, new VelocityTemplateEngine());
 
 
-        get("/output", (request, response) -> {
-          //set up the hashmap and set the output
-          Map<String, Object> model = new HashMap<String, Object>();
-          model.put("template", "templates/output.vtl");
+        post("/find", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          ArrayList<Word> wordList = request.session().attribute("wordList");
+          Integer findId = Integer.parseInt(request.queryParams("findWordById"));
+          Word foundWord = Word.find(findId);
+          model.put("foundWord", foundWord);
+          model.put("template", "templates/find.vtl");
           return new ModelAndView(model, layout);
           }, new VelocityTemplateEngine());
 
-      }
     }
+  }

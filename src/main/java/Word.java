@@ -31,7 +31,7 @@ public class Word {
 
   //helper methods
 
-  public static ArrayList<Word> allWords(){
+  public static ArrayList<Word> all(){
   return instances;
   }
 
@@ -47,4 +47,5 @@ public class Word {
     }
     return null;
   }
+
 }
