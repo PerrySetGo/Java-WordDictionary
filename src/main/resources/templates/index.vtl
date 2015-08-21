@@ -1,7 +1,12 @@
-Player 1!
-<p>
-#foreach ($randomCard in $randomCards)
-$randomCard.getName()
-$randomCard.getCardPoints()<br>
+<h3> Hi! </h3>
+#foreach ($word in $wordList)
+  <li>Entry $word.getWordId() .) $word.getName(), $word.getDefinition()
 #end
-</p>
+
+<p>There are no words added to the dictionary yet.<p><br>
+Would you like to add one?<br>
+<form action="/words" method="post">
+	<p><input type="text" name="addWordName" value="tree"></p>
+	<p><textarea name="addWordDefinition">Treedefinition</textarea></p><br>
+	<button type="submit" class="btn btn-info">Add my word!</button>
+</form>

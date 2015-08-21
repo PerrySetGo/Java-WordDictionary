@@ -12,9 +12,32 @@ public class App {
 
         get("/", (request, response) -> {
           HashMap<String, Object> model = new HashMap<String, Object>();
+          model.put("wordList", request.session().attribute("wordList"));
           model.put("template", "templates/index.vtl");
           return new ModelAndView(model, layout);
         }, new VelocityTemplateEngine());
+
+        post("/words", (request, response) -> {
+          HashMap<String, Object> model = new HashMap<String, Object>();
+          ArrayList<Word> wordList = request.session().attribute("wordList");
+
+           if (wordList == null) {
+                 wordList = new ArrayList<Word>();
+                request.session().attribute("wordList", wordList);
+                }
+
+          String userInputWordName = request.queryParams("addWordName"); 
+          String userInputWordDefinition = request.queryParams("addWordDefinition"); 
+
+          Word myWord = new Word(userInputWordName,userInputWordDefinition);
+
+          wordList.add(myWord);
+
+          model.put("template", "templates/success.vtl");
+          return new ModelAndView(model, layout);
+        }, new VelocityTemplateEngine());
+
+
 
         get("/output", (request, response) -> {
           //set up the hashmap and set the output
