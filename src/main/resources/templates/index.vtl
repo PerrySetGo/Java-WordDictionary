@@ -1,10 +1,15 @@
-<h3> Hi! </h3>
-#foreach ($word in $wordList)
-  <li>Entry $word.getWordId() .) $word.getName(), $word.getDefinition()
-#end
 
+<h3> Hi! </h3>
+#if ($wordList)
+<ol>
+#foreach ($word in $wordList)
+  <li>$word.getName(), $word.getDefinition()
+#end
+</ol>
+#else
 <p>There are no words added to the dictionary yet.<p><br>
-Would you like to add one?<br>
+#end	
+Would you like to add a word?<br>
 <form action="/words" method="post">
 	<p><input type="text" name="addWordName" value="tree"></p>
 	<p><textarea name="addWordDefinition">Treedefinition</textarea></p><br>

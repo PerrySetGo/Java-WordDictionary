@@ -1,9 +1,10 @@
 import java.util.ArrayList;
 
 public class Word {
+  
   private static ArrayList<Word> instances = new ArrayList<Word>();
   private String mName;
-  private int mWordId;//may want to change this to size of collection class later.
+  private static int mWordId;//may want to change this to size of collection class later.
   private String mDefinition;
 
   //constructor class
@@ -11,6 +12,7 @@ public class Word {
     mName = name;
     mWordId = instances.size()+1;
     mDefinition = definition;
+    instances.add(this);
   }
 
   //getter methods
@@ -18,7 +20,8 @@ public class Word {
     return mName;
   }
 
-  public int getWordId() {
+  public static int getWordId() {
+    System.out.println(mWordId);
     return mWordId;
   }
 
@@ -28,11 +31,16 @@ public class Word {
 
   //setter methods
 
-  public void addWord(){
-   // mWords.add(/*some variable here*/);
-  }
-
   public static ArrayList<Word> allWords(){
   return instances;
+  }
+
+  public static Word find(int wordId) {
+    for (Word instance : instances) {
+      if (wordId == Word.getWordId()) {
+        return instance;
+      }
+    }
+    return null;
   }
 }
