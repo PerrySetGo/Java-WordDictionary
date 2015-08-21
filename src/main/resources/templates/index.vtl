@@ -1,4 +1,4 @@
-
+<h1>Word Dictionary</h1>
 <h3> Hi! </h3>
 #if ($wordList)
 <ol>
@@ -11,7 +11,7 @@
 #end	
 Would you like to add a word?<br>
 <form action="/words" method="post">
-	<p><input type="text" name="addWordName" value="tree"></p>
-	<p><textarea name="addWordDefinition">Treedefinition</textarea></p><br>
-	<button type="submit" class="btn btn-info">Add my word!</button>
+	<p><input type="text" name="addWordName" id="addWordName" value="tree"></p>
+	<p><textarea id="addWordDefinition" name="addWordDefinition">Treedefinition</textarea></p><br>
+	<button type="submit" id="addWordButton" class="btn btn-info">Add my word!</button>
 </form>

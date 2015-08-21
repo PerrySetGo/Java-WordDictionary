@@ -4,7 +4,7 @@ public class Word {
   
   private static ArrayList<Word> instances = new ArrayList<Word>();
   private String mName;
-  private static int mWordId;//may want to change this to size of collection class later.
+  private static int mWordId;
   private String mDefinition;
 
   //constructor class
@@ -21,7 +21,7 @@ public class Word {
   }
 
   public static int getWordId() {
-    System.out.println(mWordId);
+   // System.out.println(mWordId);
     return mWordId;
   }
 
@@ -29,10 +29,14 @@ public class Word {
     return mDefinition;
   }
 
-  //setter methods
+  //helper methods
 
   public static ArrayList<Word> allWords(){
   return instances;
+  }
+
+  public static void clear() {
+  instances = new ArrayList<Word>();
   }
 
   public static Word find(int wordId) {
