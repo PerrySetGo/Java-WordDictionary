@@ -9,6 +9,7 @@ needing a definition class as well as a word class. I added in a definition clas
 work as well as they did before, including the definitions not showing up on sub pages, which is something I 
 tried and tried to make work but couldn't! If you have the time/interest, take a look at my earlier commit:
 
+33e53876e09c8c551de1573f7d3863fa2296838a
 
 as it shows that the whole project did work much better before I introduced the definition class :CC */
 
