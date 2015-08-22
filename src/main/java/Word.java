@@ -2,42 +2,52 @@ import java.util.ArrayList;
 
 public class Word {
   private static ArrayList<Word> instances = new ArrayList<Word>();
-  private String mName;
-  private static int mWordId;
-  private boolean mDeleted = false; 
 
-  //constructor class
-  public Word(String name) {
-    mName = name;
-    mWordId = instances.size()+1;
+  private String mWord;
+  private int mId;
+  private ArrayList<Definition> mDefinitions;
+  private boolean mDeleted;
+  public Word(String word) {
+    mWord = word;
     instances.add(this);
+    mId = instances.size();
+    mDefinitions = new ArrayList<Definition>();
+    mDeleted = false; 
   }
 
-  //getter methods
-  public String getName() {
-    return mName;
+  public String getWord() {
+    return mWord;
   }
 
-  public static int getWordId() {
-    return mWordId;
+  public int getWordId() {
+    return mId;
   }
 
-  //helper methods
-  public static ArrayList<Word> all(){
-  return instances;
+  public ArrayList<Definition> getDefinitions() {
+    return mDefinitions;
+  }
+
+  public void addDefinition(Definition description) {
+    mDefinitions.add(description);
+  }
+
+  public static ArrayList<Word> all() {
+    return instances;
+  }
+
+  public static Word find(int id) {
+    try {
+      return instances.get(id - 1);
+    } catch (IndexOutOfBoundsException exception) {
+      return null;
+    }
   }
 
   public static void clear() {
-  instances = new ArrayList<Word>();
+    instances.clear();
   }
 
-  public static Word find(int wordId) {
-    for (Word instance : instances) {
-      if (wordId == Word.getWordId()) {
-        return instance;
-      }
-    }
-    return null;
+  public static void removeWord(int deleteId){
+    instances.remove(deleteId);
   }
-
 }

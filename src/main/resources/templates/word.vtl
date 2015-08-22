@@ -1,0 +1,20 @@
+<h2>$word.getWord()</h2>
+
+#if ($definitions)
+	<h4>This is how some folks defined it:</h4><br>
+	<ol>
+	#foreach($definition in $word.getDefinitions())
+	 <li>$definition.getDefinition()</li>	
+	#end
+	<ol>
+
+	<br>
+#else
+Looks like nobody defined this word yet. You should add a definition!
+#end
+<p>
+<a href="/words/$word.getWordId()/definitions/new">Add a new definition</a>
+<a href="/words/new">Add a new word</a>
+<a href="/words">View word list</a>
+<a href="/"> Go Back </a>
+</p>

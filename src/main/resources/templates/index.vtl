@@ -1,36 +1,45 @@
-<h1>Word Dictionary</h1>
-<h3> Hi! </h3>
+<p>
+<h1>Word Dictionary!</h1>
+</p>
 
-#if ($wordList)
-These are the words we currently have in the dictionary:<br />
-<ol>
-#foreach ($word in $wordList)
-  <li><a href="$word.getWordId()">$word.getName()</a>
-#end
 
-#foreach ($definition in $definitionList)
-  	  <form action="/delete" method="post" style="display:inline">
-  <input type="hidden" id="delete-$word.getWordId()" name="delete-$word.getWordId()" value="true">
-  <button type="submit" id="delete" class="btn btn-default" style="display:inline">Delete this word</button>
+#if ($words)
+	These are the words we currently have in the dictionary:<br />
+	<ol>
+	#foreach($word in $words)
+	<li>
+	  <a href="/words/$word.getWordId()">$word.getWord()</a>
+	  <form action="/delete" method="post" style="display:inline">
+  	  <input type="hidden" id="delete-$word.getWordId()" name="delete-$word.getWordId()" value="true">
+  	  <button type="submit" id="delete" class="btn btn-default" style="display:inline">Delete this word</button>
   </form>
-</li>
-</ol>
-
+	  </li>
+	#end
+	</ol>
+#else 
+Sorry, there aren't any words in the dictionary yet. <br>
 #end
-#else
-<p>There are no words added yet.<p><br>
-#end	
-<p>Would you like to add a word?<br>
-<form action="/" method="post">
-	<p><input type="text" name="addWordName" id="addWordName" value="tree"></p>
-	<p><textarea id="addWordDefinition" name="addWordDefinition">Treedefinition</textarea></p><br>
-	<button type="submit" id="addWordButton" class="btn btn-info">Add my word!</button>
-</form></p>
+<p>
+Would you like to add a word? You can add a definition next.
+
+<form action="/words" method="post">
+  <label for="userInputWordName">Word</label>
+  <input id="userInputWordName" name="userInputWordName" type="text" value="Dog">
+  <button type="submit" id="addWordButton" class="btn">Add new word</button>
+</form>
+</p>
+
 <p>
 Find a word by it's ID:
 <form action="/find" method="post">
-  <label for="findWordById">Find task by ID #:</label>
+  <label for="findWordById">Find a word by ID #:</label>
   <input id="findWordById" name="findWordById" type="text">
 
   <button type="submit" id="findWordByIdButton" class="btn btn-default">Find Word by ID</button>
 </form></p>
+
+<p>
+<a href="/words/new">Add a word</a>
+<a href="/words">View all</a>
+<a href="/">Go Back</a>
+</p>

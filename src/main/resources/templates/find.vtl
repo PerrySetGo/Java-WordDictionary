@@ -1,6 +1,18 @@
-<h1>This is your word.</h1>
+<h1>Is this what you were looking for?</h1>
+<p>
+$word.getWord()
+#if ($definitions)
+	<ol>
+	#foreach($definition in $word.getDefinitions())
+	 <li>$definition.getDefinition()</li>	
+	#end
+#end
+</p>
+Search again:
+<p>
+<form action="/find" method="post">
+  <label for="findWordById">Find a word by ID #:</label>
+  <input id="findWordById" name="findWordById" type="text">
 
-$foundWord.getName()
-$foundDefinition.getDefinitionText()
-
-<a href="/">Go Back</a>
+  <button type="submit" id="findWordByIdButton" class="btn btn-default">Find Word by ID</button>
+</form></p>

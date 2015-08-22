@@ -1,6 +1,6 @@
-import java.util.ArrayList;
 import org.fluentlenium.adapter.FluentTest;
 import org.junit.ClassRule;
+import org.junit.Rule;
 import org.junit.Test;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
@@ -19,6 +19,9 @@ public class AppTest extends FluentTest {
 	@ClassRule
 	public static ServerRule server = new ServerRule();
 
+	@Rule
+  	public ClearRule clearRule = new ClearRule();
+
 	@Test
 	public void rootTest() {
 	goTo("http://localhost:4567/");
@@ -28,35 +31,40 @@ public class AppTest extends FluentTest {
 	@Test
 	public void wordIsCreatedTest() {
 	goTo("http://localhost:4567/");
-	fill("#addWordName").with("Dog");
-	fill("#addWordDefinition").with("A furry mammal");
+	fill("#userInputWordName").with("Dog");
 	submit("#addWordButton");
-	assertThat(pageSource()).contains("Your word has been saved.");
-	}
-
-	@Test
-	public void wordIsDisplayedTest() {
-	goTo("http://localhost:4567/");
-	fill("#addWordName").with("Dog");
-	fill("#addWordDefinition").with("A furry mammal");
-	submit("#addWordButton");;
-	click("a", withText("Go Back"));
 	assertThat(pageSource()).contains("Dog");
 	}
 
 	@Test
-	public void multipleWordsAreDisplayedTest() {
+	public void wordisCreatedWithoutADefinitionTest() {
 	goTo("http://localhost:4567/");
-	fill("#addWordName").with("Dog");
-	fill("#addWordDefinition").with("A furry mammal");
-	submit("#addWordButton");;
-	click("a", withText("Go Back"));
-	fill("#addWordName").with("Pigeon");
-	fill("#addWordDefinition").with("A flying rat");
-	submit("#addWordButton");;
-	click("a", withText("Go Back"));
-	assertThat(pageSource()).contains("Dog");
-	assertThat(pageSource()).contains("Pigeon");
+	fill("#userInputWordName").with("Dog");
+	submit("#addWordButton");
+	click("a", withText("Dog"));
+	assertThat(pageSource()).contains("Looks like nobody defined this word yet");
+	}
 
+	@Test
+	public void DefinitionFormLoadsTest() {
+	goTo("http://localhost:4567/");
+	fill("#userInputWordName").with("Dog");
+	submit("#addWordButton");
+	click("a", withText("Dog"));
+	click("a", withText("Add a new definition"));
+	assertThat(pageSource()).contains("Add a Definition to Dog");
+	}
+
+	@Test
+	public void DefinitionFormsDescriptionCorrectlyTest() {
+	goTo("http://localhost:4567/");
+	fill("#userInputWordName").with("Dog");
+	submit("#addWordButton");
+	click("a", withText("Dog"));
+	click("a", withText("Add a new definition"));
+	assertThat(pageSource()).contains("Add a Definition to Dog");
+	fill("#description").with("A furry mammal");
+	click(".btn");
+	assertThat(pageSource()).contains("A furry mammal");
 	}
 }
