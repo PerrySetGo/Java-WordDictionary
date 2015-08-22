@@ -5,17 +5,20 @@
 These are the words we currently have in the dictionary:<br />
 <ol>
 #foreach ($word in $wordList)
-  <li><a href="$word.getWordId()">$word.getName()</a>, $word.getDefinition()
+  <li><a href="$word.getWordId()">$word.getName()</a>
+#end
 
+#foreach ($definition in $definitionList)
   	  <form action="/delete" method="post" style="display:inline">
   <input type="hidden" id="delete-$word.getWordId()" name="delete-$word.getWordId()" value="true">
   <button type="submit" id="delete" class="btn btn-default" style="display:inline">Delete this word</button>
   </form>
 </li>
 </ol>
+
 #end
 #else
-<p>There are no words added to the dictionary yet.<p><br>
+<p>There are no words added yet.<p><br>
 #end	
 <p>Would you like to add a word?<br>
 <form action="/" method="post">

@@ -1,14 +1,4 @@
 <h1>This is your word.</h1>
 
-#if ($foundWord)
   <h3>$foundWord.getWordId().) $foundWord.getName()</h3>
-  <p>$foundWord.getDefinition()</p>
-  Would you like to add another definition for this word?
-  <form action="/" method="post">
-	<p><input type="text" name="addWordName" id="addWordName" value="$foundWord.getName()" readonly></p>
-	<p><textarea id="addWordDefinition" name="addWordDefinition">New definition</textarea></p><br>
-	<button type="submit" id="addWordButton" class="btn btn-info">Add my word!</button>
-</form>
-#else
-  <h3> Sorry, that word couldn't be found.</h3>
-#end
+  <p>$foundDefinition.getDefinitionText()</p>
