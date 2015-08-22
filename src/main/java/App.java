@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.ArrayList;
 import spark.ModelAndView;
 import spark.template.velocity.VelocityTemplateEngine;
 import static spark.Spark.*;
@@ -35,7 +34,24 @@ public class App {
           model.put("wordList", Word.all());
           model.put("template", "templates/success.vtl");
           return new ModelAndView(model, layout);
+
         }, new VelocityTemplateEngine());
+
+        post("/delete", (request, response) -> {
+            HashMap<String, Object> model = new HashMap<String, Object>();
+            ArrayList<Word> wordList = request.session().attribute("wordList");
+
+            for (Iterator<Word> iterator = wordList.iterator(); iterator.hasNext();) {
+            Word word = iterator.next();
+            boolean delete = Boolean.parseBoolean(request.queryParams("delete-"+word.getWordId()));
+            if (delete) {
+              iterator.remove();
+              }
+            }
+
+            model.put("template", "templates/deleted.vtl");
+            return new ModelAndView(model, layout);
+            }, new VelocityTemplateEngine());
 
         get("/:id", (request, response) -> {
             HashMap<String, Object> model = new HashMap<String, Object>();

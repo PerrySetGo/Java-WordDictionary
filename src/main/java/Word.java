@@ -5,6 +5,7 @@ public class Word {
   private static ArrayList<Word> instances = new ArrayList<Word>();
   private String mName;
   private static int mWordId;
+  private boolean mDeleted = false; 
   private String mDefinition;
 
   //constructor class
@@ -37,6 +38,11 @@ public class Word {
 
   public static void clear() {
   instances = new ArrayList<Word>();
+  }
+
+  public Word delete() {
+   mDeleted = true;
+   return this;
   }
 
   public static Word find(int wordId) {
